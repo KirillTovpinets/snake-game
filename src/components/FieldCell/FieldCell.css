@@ -1,0 +1,11 @@
+.snake-cell {
+  border: 1px solid #ccc;
+}
+
+.snake-cell.active {
+  background: #000;
+}
+
+.snake-cell.is-apple {
+  background-color: orange;
+}

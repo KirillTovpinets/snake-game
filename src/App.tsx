@@ -1,22 +1,17 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-import { Navbar } from './components/Navbar'
-import { About } from './pages/About'
-import { Home } from './pages/Home'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { GameField } from './components/GameField'
+import { moveSnake } from './features/game'
+import { KeyboardCodes } from './types'
 
 const App: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Navbar />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  )
+  const dispatch = useDispatch()
+  useEffect(() => {
+    window.document.addEventListener('keydown', (event: KeyboardEvent) => {
+      dispatch(moveSnake(event.code as KeyboardCodes))
+    })
+  }, [])
+  return <GameField></GameField>
 }
 
 export default App
