@@ -1,5 +1,6 @@
-import React, { useRef } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { moveSnake, setTimerId } from '../features/game'
 import { useAppConfig } from '../hooks/useAppConfig'
 import { CellConfig } from '../interfaces'
 import { RootState } from '../store'
@@ -11,6 +12,22 @@ export const GameField: React.FC = () => {
   useAppConfig(fieldRef)
 
   const cells = useSelector((state: RootState) => state.game.cells)
+  const speed = useSelector((state: RootState) => state.game.speed)
+  const timer = useSelector((state: RootState) => state.game.timerId)
+  const isStarted = useSelector((state: RootState) => state.game.isStarted)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!isStarted) {
+      return
+    }
+    clearInterval(timer)
+    const timerId = setInterval(() => {
+      dispatch(moveSnake())
+    }, speed)
+    dispatch(setTimerId(timerId))
+  }, [speed, isStarted])
 
   return (
     <div className="sname-game-field" ref={fieldRef}>

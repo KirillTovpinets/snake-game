@@ -11,9 +11,23 @@ export interface CellConfig extends Position {
   next: CellConfig | null
 }
 export interface Game {
-  cells: CellConfig[]
   apple: Position
-  snake: CellConfig | null
+  cells: CellConfig[]
   fieldSize: [number, number]
+  snake: CellConfig | null
   snakeDirection: KeyboardCodes | null
+  snakeSize: number
+  speed: number
+  timerId: any | null
+  isStarted: boolean
+}
+
+export interface UpdatedSnakeData {
+  head: CellConfig
+  appleCoordinates?: Position | null
+  isSnakeIncremented: boolean
+}
+export interface FieldConfig {
+  size: [number, number]
+  cells: CellConfig[]
 }

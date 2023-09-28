@@ -10,7 +10,7 @@ interface Props {
   x: number
   y: number
 }
-const FieldCell = ({ height, width, id, x, y }: Props) => {
+const FieldCell = ({ width, id, x, y }: Props) => {
   const cellConfig = useSelector(({ game }: RootState) => {
     const { snake } = game
     if (!snake) {
@@ -34,7 +34,7 @@ const FieldCell = ({ height, width, id, x, y }: Props) => {
       className={`snake-cell ${cellConfig !== null ? 'active' : ''} ${
         isApple ? 'is-apple' : ''
       }`}
-      style={{ width: `${width}px`, height: `${height}px` }}
+      style={{ width: `${width}px` }}
     ></div>
   )
 }

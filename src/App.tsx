@@ -1,17 +1,29 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { GameField } from './components/GameField'
-import { moveSnake } from './features/game'
+import { GameSettings } from './components/GameSettings/GameSettings'
+import { setSnakeDirection } from './features/game'
+import { RootState } from './store'
 import { KeyboardCodes } from './types'
 
 const App: React.FC = () => {
   const dispatch = useDispatch()
+  const timerId = useSelector((state: RootState) => state.game.timerId)
   useEffect(() => {
-    window.document.addEventListener('keydown', (event: KeyboardEvent) => {
-      dispatch(moveSnake(event.code as KeyboardCodes))
-    })
+    const keydownHanlder = (event: KeyboardEvent) => {
+      dispatch(setSnakeDirection(event.code as KeyboardCodes))
+    }
+    window.document.addEventListener('keydown', keydownHanlder)
+
+    return () => window.document.removeEventListener('keydown', keydownHanlder)
   }, [])
-  return <GameField></GameField>
+
+  return (
+    <div>
+      <GameField />
+      {!timerId && <GameSettings />}
+    </div>
+  )
 }
 
 export default App
