@@ -1,8 +1,10 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 import {
+  INITIAL_SPEED_IN_MILISECONDS,
   SPEED_MINIMUM_IN_MILISECONDS,
   SPEED_STEP_IN_MILISECONDS,
+  TESTING_SPEED_IN_MILISECONDS,
 } from '../constants'
 import {
   getRandormCoordinates,
@@ -12,13 +14,14 @@ import {
 import { CellConfig, FieldConfig, Game } from '../interfaces'
 import { KeyboardCodes } from '../types'
 const initialState: Game = {
-  cells: [],
   apple: { x: 0, y: 0 },
+  cells: [],
+  isInProgress: false,
   snake: null,
   fieldSize: [0, 0],
   snakeDirection: KeyboardCodes.down,
   timerId: null,
-  speed: 100,
+  speed: INITIAL_SPEED_IN_MILISECONDS,
   snakeSize: 1,
   isStarted: false,
 }
@@ -33,9 +36,11 @@ const gameSlice = createSlice({
     },
     initGame(state: Game) {
       const [numRows, numCols] = state.fieldSize
-      const appleCoordinates = getRandormCoordinates(numRows, numCols)
+      const appleCoordinates = getRandormCoordinates(numRows - 1, numCols - 1)
       const startY = Math.floor(numRows / 2)
       const startX = Math.floor(numCols / 2)
+
+      state.speed = process.env.NODE_ENV === 'production' ? INITIAL_SPEED_IN_MILISECONDS : TESTING_SPEED_IN_MILISECONDS
 
       const startCell = state.cells.find(
         (cell) => cell.x === startX && cell.y === startY
@@ -48,6 +53,7 @@ const gameSlice = createSlice({
       state.timerId = action.payload
     },
     setSnakeDirection(state: Game, action: PayloadAction<KeyboardCodes>) {
+      state.isInProgress = true
       if (
         (action.payload === KeyboardCodes.down &&
           state.snakeDirection === KeyboardCodes.up) ||
@@ -86,8 +92,12 @@ const gameSlice = createSlice({
 
         case KeyboardCodes.down:
           nextCell = nextActiveCell(state, x, y + 1)
+          break
+        default:
+          nextCell = nextActiveCell(state, x, y)
       }
       if (nextCell === null) {
+        state.isInProgress = false;
         clearInterval(state.timerId)
         return {
           ...initialState,
@@ -111,9 +121,9 @@ const gameSlice = createSlice({
             speed > SPEED_MINIMUM_IN_MILISECONDS
               ? speed
               : SPEED_MINIMUM_IN_MILISECONDS
-          console.log(speed)
         }
       }
+      state.isInProgress = false
     },
   },
 })

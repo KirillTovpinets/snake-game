@@ -33,10 +33,17 @@ export const nextActiveCell = (
       nextCell = cells.find(comparator(targetX, 0))
     }
   }
-  if (!nextCell || nextCell.id === state.snake?.next?.id) {
-    return null
+  
+  let pointer = state.snake;
+
+  while(pointer !== null) {
+    if(!nextCell || nextCell.id === pointer.id) {
+      debugger
+      return null
+    }
+    pointer = pointer.next
   }
-  return nextCell
+  return nextCell || null
 }
 
 export const getUpdateSnakeHead = (
@@ -62,7 +69,6 @@ export const getUpdateSnakeHead = (
       }
 
       isAccepted = isOk.every((ok) => ok)
-      console.log(newAppleCoordinates)
     } while (!isAccepted)
     return {
       head: { ...nextCell, next: temp },

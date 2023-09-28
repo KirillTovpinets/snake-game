@@ -1,11 +1,24 @@
 import { useDispatch } from 'react-redux'
 import { initGame } from '../../features/game'
 import './GameSettings.css'
+import { useEffect } from 'react'
 export const GameSettings = () => {
   const dispatch = useDispatch()
   const handleStartGame = () => {
     dispatch(initGame())
   }
+
+  useEffect(() => {
+    const handler = (event: KeyboardEvent) => {
+      if(event.code !== 'Enter') {
+        return;
+      } 
+      handleStartGame();
+    };
+    window.document.addEventListener('keydown', handler)
+
+    return () => window.document.removeEventListener('keydown', handler)
+  }, [])
   return (
     <div className="snake-start-window">
       <div className="snake-start-pannel">

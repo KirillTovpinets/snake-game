@@ -20,6 +20,7 @@ export interface Game {
   speed: number
   timerId: any | null
   isStarted: boolean
+  isInProgress: boolean
 }
 
 export interface UpdatedSnakeData {
