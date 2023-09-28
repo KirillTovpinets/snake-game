@@ -33,11 +33,11 @@ export const nextActiveCell = (
       nextCell = cells.find(comparator(targetX, 0))
     }
   }
-  
-  let pointer = state.snake;
 
-  while(pointer !== null) {
-    if(!nextCell || nextCell.id === pointer.id) {
+  let pointer = state.snake
+
+  while (pointer !== null) {
+    if (!nextCell || nextCell.id === pointer.id) {
       debugger
       return null
     }

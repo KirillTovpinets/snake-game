@@ -22,7 +22,13 @@ const initialState: Game = {
   snakeDirection: KeyboardCodes.down,
   timerId: null,
   speed: INITIAL_SPEED_IN_MILISECONDS,
-  snakeSize: 1,
+  statistics: {
+    snakeSize: 1,
+    speedLevel: 1,
+    gameEnded: null,
+    gameStarted: null,
+  },
+  isGameOver: false,
   isStarted: false,
 }
 
@@ -40,13 +46,18 @@ const gameSlice = createSlice({
       const startY = Math.floor(numRows / 2)
       const startX = Math.floor(numCols / 2)
 
-      state.speed = process.env.NODE_ENV === 'production' ? INITIAL_SPEED_IN_MILISECONDS : TESTING_SPEED_IN_MILISECONDS
+      state.speed =
+        process.env.NODE_ENV === 'production'
+          ? INITIAL_SPEED_IN_MILISECONDS
+          : TESTING_SPEED_IN_MILISECONDS
 
       const startCell = state.cells.find(
         (cell) => cell.x === startX && cell.y === startY
       )
       state.snake = startCell || null
       state.isStarted = true
+      state.statistics.gameStarted = new Date().toString()
+      state.isGameOver = false
       state.apple = appleCoordinates
     },
     setTimerId(state: Game, action: PayloadAction<any>) {
@@ -97,26 +108,33 @@ const gameSlice = createSlice({
           nextCell = nextActiveCell(state, x, y)
       }
       if (nextCell === null) {
-        state.isInProgress = false;
         clearInterval(state.timerId)
+        console.log(new Date().toString())
         return {
           ...initialState,
           fieldSize: state.fieldSize,
           cells: state.cells,
           snake: state.snake,
+          isInProgress: false,
+          isGameOver: true,
+          statistics: {
+            ...state.statistics,
+            gameEnded: new Date().toString(),
+          },
         }
       } else {
         const updatedData = getUpdateSnakeHead(state, nextCell!)
         state.snake = updatedData.head
-        state.snakeSize = updatedData.isSnakeIncremented
-          ? state.snakeSize + 1
-          : state.snakeSize
+        if (updatedData.isSnakeIncremented) {
+          state.statistics.snakeSize++
+        }
         state.apple = updatedData.appleCoordinates
           ? updatedData.appleCoordinates
           : state.apple
 
         if (updatedData.appleCoordinates) {
           const speed = state.speed - SPEED_STEP_IN_MILISECONDS
+          state.statistics.speedLevel++
           state.speed =
             speed > SPEED_MINIMUM_IN_MILISECONDS
               ? speed

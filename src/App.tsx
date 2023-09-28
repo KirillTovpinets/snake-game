@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { GameField } from './components/GameField'
 import { GameSettings } from './components/GameSettings/GameSettings'
+import { GameStatistics } from './components/GameStatistics/GameStatistics'
 import { DIRECTIONS, MAX_DELTA_FRACTION } from './constants'
 import { setSnakeDirection } from './features/game'
 import { RootState } from './store'
@@ -10,6 +11,7 @@ import { KeyboardCodes } from './types'
 const App: React.FC = () => {
   const dispatch = useDispatch()
   const timerId = useSelector((state: RootState) => state.game.timerId)
+  const isGameOver = useSelector((state: RootState) => state.game.isGameOver)
   const isInProgress = useSelector(
     (state: RootState) => state.game.isInProgress
   )
@@ -55,7 +57,8 @@ const App: React.FC = () => {
   return (
     <div>
       <GameField />
-      {!timerId && <GameSettings />}
+      {!timerId && !isGameOver && <GameSettings />}
+      {isGameOver && <GameStatistics />}
     </div>
   )
 }

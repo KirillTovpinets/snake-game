@@ -10,16 +10,24 @@ export interface CellConfig extends Position {
   height: number
   next: CellConfig | null
 }
+
+export interface GameStatistics {
+  snakeSize: number
+  speedLevel: number
+  gameStarted: string | null
+  gameEnded: string | null
+}
 export interface Game {
   apple: Position
   cells: CellConfig[]
   fieldSize: [number, number]
   snake: CellConfig | null
   snakeDirection: KeyboardCodes | null
-  snakeSize: number
+  statistics: GameStatistics
   speed: number
   timerId: any | null
   isStarted: boolean
+  isGameOver: boolean
   isInProgress: boolean
 }
 
