@@ -1,6 +1,8 @@
 {
   "name": "snake-game",
   "version": "0.1.0",
+  "types": "./src/index.tsx",
+  "main": "./src/index.tsx",
   "private": true,
   "homepage": "https://kirilltovpinets.github.io/snake-game",
   "dependencies": {
