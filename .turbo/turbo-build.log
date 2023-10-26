@@ -2,8 +2,20 @@
 > snake-game@0.1.0 build
 > react-scripts build
 
-sh: react-scripts: command not found
-npm ERR! Lifecycle script `build` failed with error: 
-npm ERR! Error: command failed 
-npm ERR!   in workspace: snake-game@0.1.0 
-npm ERR!   at location: /Users/user/Documents/github/game-mono/packages/snake-game 
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  59.09 kB  build/static/js/main.fa65afa9.js
+  419 B     build/static/css/main.83a00b72.css
+
+The project was built assuming it is hosted at /snake-game/.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+

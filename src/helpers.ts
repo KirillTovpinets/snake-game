@@ -59,7 +59,7 @@ export const getUpdateSnakeHead = (
       newAppleCoordinates = getRandormCoordinates(height - 1, width - 1)
       let pointer = state.snake
 
-      const isOk = []
+      const isOk: boolean[] = []
       while (pointer !== null) {
         isOk.push(
           pointer.x !== newAppleCoordinates.x ||
