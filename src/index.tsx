@@ -5,10 +5,10 @@ import './index.css'
 
 import App from './App'
 
-const SnakeApp = () => (
+const SnakeGame = () => (
   <Provider store={store}>
     <App />
   </Provider>
 )
 
-export default SnakeApp
+export default SnakeGame
