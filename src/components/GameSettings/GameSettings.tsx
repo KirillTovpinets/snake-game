@@ -1,8 +1,9 @@
-import { useStartGame } from '../../hooks/useStartGame'
-import { Button } from '../layout/Button'
-import { Modal } from '../layout/Modal'
-import { Pannel } from '../layout/Pannel'
-import './GameSettings.css'
+import React from 'react';
+import { Modal } from 'ui';
+import { useStartGame } from '../../hooks/useStartGame';
+import { Button } from '../layout/Button';
+import { Pannel } from '../layout/Pannel';
+import './GameSettings.css';
 export const GameSettings = () => {
   const { handleStartGame } = useStartGame()
   return (
