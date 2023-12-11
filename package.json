@@ -41,9 +41,6 @@
     "uuid": "^9.0.1",
     "ui": "workspace:*"
   },
-  "devDependencies": {
-    "tsconfig": "workspace:*"
-  },
   "scripts": {
     "predeploy": "pnpm run build",
     "deploy": "gh-pages -b main -d build",

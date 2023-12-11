@@ -1,10 +1,9 @@
 import dayjs from 'dayjs'
-import React from 'react'
 import { useSelector } from 'react-redux'
+import { Modal } from 'ui'
 import { useStartGame } from '../../hooks/useStartGame'
 import { RootState } from '../../store'
 import { Button } from '../layout/Button'
-import { Modal } from '../layout/Modal'
 import { Pannel } from '../layout/Pannel'
 import { Row } from '../layout/Row'
 export const GameStatistics = () => {

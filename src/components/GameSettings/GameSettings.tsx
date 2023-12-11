@@ -1,4 +1,3 @@
-import React from 'react';
 import { Modal } from 'ui';
 import { useStartGame } from '../../hooks/useStartGame';
 import { Button } from '../layout/Button';
