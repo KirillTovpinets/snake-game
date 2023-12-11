@@ -30,14 +30,14 @@ const App: React.FC = () => {
     document.addEventListener('touchstart', (event: TouchEvent) => {
       const touch = event.changedTouches[0]
 
-      startX = touch.pageX
-      startY = touch.pageY
+      startX = touch?.pageX || 0
+      startY = touch?.pageY || 0
     })
 
     document.addEventListener('touchend', (event: TouchEvent) => {
       const touch = event.changedTouches[0]
-      const deltaX = touch.pageX - startX
-      const deltaY = touch.pageY - startY
+      const deltaX = touch?.pageX || 0 - startX
+      const deltaY = touch?.pageY || 0 - startY
       const isXFractionOk = Math.abs(deltaX) < MAX_DELTA_FRACTION
       const isYFractionOk = Math.abs(deltaY) < MAX_DELTA_FRACTION
       if (deltaX > 0 && !isXFractionOk) {

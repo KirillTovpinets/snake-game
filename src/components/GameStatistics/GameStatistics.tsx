@@ -1,6 +1,6 @@
+import { Modal } from '@repo/ui'
 import dayjs from 'dayjs'
 import { useSelector } from 'react-redux'
-import { Modal } from 'ui'
 import { useStartGame } from '../../hooks/useStartGame'
 import { RootState } from '../../store'
 import { Button } from '../layout/Button'

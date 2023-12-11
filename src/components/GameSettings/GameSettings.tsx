@@ -1,4 +1,4 @@
-import { Modal } from 'ui';
+import { Modal } from '@repo/ui';
 import { useStartGame } from '../../hooks/useStartGame';
 import { Button } from '../layout/Button';
 import { Pannel } from '../layout/Pannel';
