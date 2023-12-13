@@ -8,7 +8,7 @@ Compiled successfully.
 File sizes after gzip:
 
   59.02 kB  build\static\js\main.fae6aeb5.js
-  367 B     build\static\css\main.df4b67f7.css
+  420 B     build\static\css\main.f9eff8f0.css
 
 The project was built assuming it is hosted at /snake-game/.
 You can control this with the homepage field in your package.json.
