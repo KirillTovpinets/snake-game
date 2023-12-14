@@ -1,21 +1,11 @@
 
-> snake-game@0.1.0 build C:\github\resume\packages\snake-game
+> snake-game@0.1.0 build E:\github\resume\packages\snake-game
 > react-scripts build
 
 Creating an optimized production build...
-Compiled successfully.
+Failed to compile.
 
-File sizes after gzip:
+Module not found: Error: Can't resolve '@repo/ui/dist/esm/dist/main.css' in 'E:\github\resume\packages\snake-game\src'
 
-  59.02 kB  build\static\js\main.fae6aeb5.js
-  420 B     build\static\css\main.f9eff8f0.css
 
-The project was built assuming it is hosted at /snake-game/.
-You can control this with the homepage field in your package.json.
-
-The build folder is ready to be deployed.
-
-Find out more about deployment here:
-
-  https://cra.link/deployment
-
+ ELIFECYCLE  Command failed with exit code 1.
