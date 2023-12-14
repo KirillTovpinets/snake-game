@@ -1,3 +1,4 @@
+import "@repo/ui/dist/index.css";
 import { Provider } from "react-redux";
 
 import App from "./App";
